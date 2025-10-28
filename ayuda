@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+  Diseño simple de una calculadora de suma en FXML usando VBox.
+  Contiene dos campos de texto (Número 1 y Número 2) y un botón para sumar.
+-->
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.CalculadoraController"
+      spacing="12" alignment="CENTER"
+      style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
+
+    <Label text="Calculadora de Suma" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Número 1:" style="-fx-font-size: 16px;"/>
+        <TextField fx:id="txtNumero1" promptText="Ingrese número 1" style="-fx-font-size: 16px; -fx-pref-width: 200;"/>
+    </HBox>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Número 2:" style="-fx-font-size: 16px;"/>
+        <TextField fx:id="txtNumero2" promptText="Ingrese número 2" style="-fx-font-size: 16px; -fx-pref-width: 200;"/>
+    </HBox>
+
+    <Button fx:id="btnSumar" text="Sumar" onAction="#sumarNumeros"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-pref-width: 100;"/>
+
+    <Label fx:id="lblResultado" text="Resultado: " style="-fx-font-size: 18px; -fx-text-fill: #222; -fx-font-weight: bold;"/>
+
+</VBox>
+

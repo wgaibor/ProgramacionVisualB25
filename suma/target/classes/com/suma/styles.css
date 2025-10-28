@@ -1,0 +1,21 @@
+/* estilo base del botón */
+.boton-sumar {
+    -fx-background-color: #4CAF50; 
+    -fx-text-fill: white;
+    -fx-font-size: 20px; 
+    -fx-font-weight: bold; 
+    -fx-padding: 10px;
+    -fx-background-radius: 8;
+}
+
+/* efecto hover: cambia fondo y texto */
+.boton-sumar:hover {
+    -fx-background-color: #d703eb; /* verde más claro */
+    -fx-text-fill: #0f1324;         /* texto oscuro */
+}
+
+/* efecto click (presionado) */
+.boton-sumar:pressed {
+    -fx-background-color: #f55105; /* verde más oscuro */
+    -fx-text-fill: rgb(5, 61, 245);
+}
