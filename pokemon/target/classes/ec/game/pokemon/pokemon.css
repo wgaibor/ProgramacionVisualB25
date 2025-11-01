@@ -6,4 +6,18 @@
 .pokeball-icon {
     -fx-font-size: 48px;
     -fx-text-fill: #ff6b6b;
+    -fx-effect: dropshadow(gaussian, rgba(78, 77, 59, 0.267), 3, 0, 3, 1);
+}
+
+.title {
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0a0808;
+    -fx-effect: dropshadow(gaussian, rgba(233, 10, 10, 0.4), 3, 0, 2, 1);
+}
+
+.header {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-padding: 20;
 }
