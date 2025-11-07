@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "suma"
+		},
+		{
+			"path": "pokemon"
 		}
 	],
 	"settings": {}

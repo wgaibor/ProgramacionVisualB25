@@ -21,3 +21,29 @@
     -fx-background-radius: 15;
     -fx-padding: 20;
 }
+
+.search-field{
+    -fx-background-color: white;
+    -fx-background-radius: 25;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 25;
+    -fx-border-width: 2;
+    -fx-padding: 12 20;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #9c7b6c;
+}
+
+.search-field:focused {
+    -fx-border-color: #74b9ff;
+    -fx-border-width: 3;
+}
+
+.search-button {
+    -fx-background-color: #00b894;
+    -fx-text-fill: white;
+    -fx-background-radius: 25;
+    -fx-padding: 12 24;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}

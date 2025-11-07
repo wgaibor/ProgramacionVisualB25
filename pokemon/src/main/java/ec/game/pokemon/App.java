@@ -17,8 +17,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("pokemon"), 640, 480);
+        scene = new Scene(loadFXML("pokemon"), 1000, 700);
         stage.setScene(scene);
+        stage.setTitle("Pokédex - Explorador de pokémon");
         stage.show();
     }
 
