@@ -38,7 +38,7 @@
     -fx-border-width: 3;
 }
 
-.search-button {
+.search-button, .random-button, .load-more-button {
     -fx-background-color: #00b894;
     -fx-text-fill: white;
     -fx-background-radius: 25;
@@ -46,4 +46,41 @@
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-cursor: hand;
+}
+
+.random-button {
+    -fx-background-color: #fdcb6e;
+}
+
+.load-more-button {
+    -fx-background-color: #6c5ce7;
+}
+
+.search-button:hover, .random-button:hover, .load-more-button:hover {
+    -fx-background-color: #284b44;
+    -fx-effect: dropshadow(gaussian, rgba(56, 0, 0, 0.4), 3, 0, 2, 1);
+}
+
+.random-button:hover {
+    -fx-background-color: #c25529;
+}
+
+.random-button:hover {
+    -fx-background-color: #5e5c66;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+
+.pokemon-container {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-spacing: 20;
 }
