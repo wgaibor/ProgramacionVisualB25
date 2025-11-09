@@ -30,7 +30,7 @@
 
    <center>
       <ScrollPane fitToWidth="true" styleClass="scroll-pane">
-         <VBox styleClass="pokemon-container" />
+         <VBox fx:id="pokemonContainer" styleClass="pokemon-container" />
       </ScrollPane>
    </center>
 
