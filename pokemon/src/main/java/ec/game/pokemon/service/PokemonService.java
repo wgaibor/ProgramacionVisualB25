@@ -10,6 +10,7 @@ import java.util.concurrent.CompletableFuture;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ec.game.pokemon.model.PokemonListResponse;
+import ec.game.pokemon.model.PokemonResponse;
 
 public class PokemonService {
     private static final String BASE_URL = "https://pokeapi.co/api/v2/";
@@ -27,6 +28,18 @@ public class PokemonService {
                 String url = BASE_URL+"pokemon?limit="+ limit +"&offset="+ offset;
                 String jsonResponse = makeHttpRequest(url);
                 return objectMapper.readValue(jsonResponse, PokemonListResponse.class);
+            } catch (Exception e) {
+                throw new RuntimeException("No se pudo consumir el webservices  "+e.getMessage(), e);
+            }
+        } );
+    }
+
+    public CompletableFuture<PokemonResponse> getPokemonByURL(String urlPokemon) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                String url = urlPokemon;
+                String jsonResponse = makeHttpRequest(url);
+                return objectMapper.readValue(jsonResponse, PokemonResponse.class);
             } catch (Exception e) {
                 throw new RuntimeException("No se pudo consumir el webservices  "+e.getMessage(), e);
             }
