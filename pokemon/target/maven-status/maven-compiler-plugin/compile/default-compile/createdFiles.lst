@@ -1,0 +1,13 @@
+ec/game/pokemon/model/PokemonListItem.class
+ec/game/pokemon/App.class
+ec/game/pokemon/PokemonController.class
+ec/game/pokemon/model/ItemStat.class
+ec/game/pokemon/model/PokemonStat.class
+ec/game/pokemon/PokemonController$2.class
+ec/game/pokemon/model/PokemonListResponse.class
+ec/game/pokemon/PokemonController$1.class
+ec/game/pokemon/model/PokemonSprites.class
+ec/game/pokemon/model/ItemsTypes.class
+ec/game/pokemon/model/PokemonResponse.class
+ec/game/pokemon/service/PokemonService.class
+ec/game/pokemon/model/PokemonTypes.class

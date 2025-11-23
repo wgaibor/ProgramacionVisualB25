@@ -2,9 +2,6 @@ package ec.game.pokemon.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class PokemonResponse {
     private int id;
     private String name;
@@ -43,5 +40,7 @@ public class PokemonResponse {
         this.stats = stats;
     }
 
-    
+    public String getFormattedName() {
+        return name != null ? name.substring(0, 1).toUpperCase()+name.substring(1) : "";
+    }
 }

@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.concurrent.CompletableFuture;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 
 import ec.game.pokemon.model.PokemonListResponse;
 import ec.game.pokemon.model.PokemonResponse;
@@ -20,6 +21,8 @@ public class PokemonService {
 
     public PokemonService() {
         this.objectMapper = new ObjectMapper();
+        // Ignorar campos desconocidos globalmente
+        this.objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     public CompletableFuture<PokemonListResponse> getPokemonList(int limit, int offset) {
@@ -38,6 +41,18 @@ public class PokemonService {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 String url = urlPokemon;
+                String jsonResponse = makeHttpRequest(url);
+                return objectMapper.readValue(jsonResponse, PokemonResponse.class);
+            } catch (Exception e) {
+                throw new RuntimeException("No se pudo consumir el webservices  "+e.getMessage(), e);
+            }
+        } );
+    }
+
+    public CompletableFuture<PokemonResponse> getPokemonByName(String namePokemon) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                String url = BASE_URL+"pokemon/"+namePokemon;
                 String jsonResponse = makeHttpRequest(url);
                 return objectMapper.readValue(jsonResponse, PokemonResponse.class);
             } catch (Exception e) {
