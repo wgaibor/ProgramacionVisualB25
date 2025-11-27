@@ -5,7 +5,7 @@ import java.util.List;
 public class PokemonListResponse {
     private int count;
     private String next;
-    private int previous;
+    private String previous;
     private List<PokemonListItem> results;
 
     public int getCount() {
@@ -20,10 +20,10 @@ public class PokemonListResponse {
     public void setNext(String next) {
         this.next = next;
     }
-    public int getPrevious() {
+    public String getPrevious() {
         return previous;
     }
-    public void setPrevious(int previous) {
+    public void setPrevious(String previous) {
         this.previous = previous;
     }
     public List<PokemonListItem> getResults() {

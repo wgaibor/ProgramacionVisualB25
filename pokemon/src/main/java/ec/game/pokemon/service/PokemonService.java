@@ -26,9 +26,12 @@ public class PokemonService {
     }
 
     public CompletableFuture<PokemonListResponse> getPokemonList(int limit, int offset) {
+        System.out.println("VALOR DEL LIMITE  "+limit);
+        System.out.println("VALOR DEL OFFSET  "+ offset);
         return CompletableFuture.supplyAsync(() -> {
             try {
                 String url = BASE_URL+"pokemon?limit="+ limit +"&offset="+ offset;
+                System.out.println("URL ARMADA  "+url);
                 String jsonResponse = makeHttpRequest(url);
                 return objectMapper.readValue(jsonResponse, PokemonListResponse.class);
             } catch (Exception e) {

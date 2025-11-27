@@ -1,8 +1,11 @@
 package ec.game.pokemon;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import ec.game.pokemon.model.PokemonListItem;
 import ec.game.pokemon.model.PokemonListResponse;
@@ -36,19 +39,24 @@ public class PokemonController {
 
     PokemonService pokemonService;
 
+    List<PokemonListItem> lstPokemon = null;
+
+    private final int POKEMON_LIMIT = 3;
+
     @FXML
     void initialize(){
         pokemonService = new PokemonService();
-        loadInitialPokemon();
+        lstPokemon = new ArrayList<>();
+        loadInitialPokemon(POKEMON_LIMIT, lstPokemon.size());
     }
 
-    private void loadInitialPokemon() {
-        showLoadingIndicator();
+    private void loadInitialPokemon(int limite, int ultimoRegistro) {
+        showLoadingIndicator("Cargando...");
         Task<PokemonListResponse> loadTask = new Task<PokemonListResponse>() {
 
             @Override
             protected PokemonListResponse call() throws Exception {
-                return pokemonService.getPokemonList(10, 0).get();
+                return pokemonService.getPokemonList(limite, ultimoRegistro).get();
             }
             
         };
@@ -57,6 +65,7 @@ public class PokemonController {
             hideLoadingIndicator();
             PokemonListResponse response = loadTask.getValue();
             if (response != null && response.getResults() != null) {
+                lstPokemon.addAll(response.getResults());
                 for (PokemonListItem objPokemon : response.getResults()) {
                     callDetailsPokemon(objPokemon.getUrl());
                 }
@@ -236,8 +245,12 @@ public class PokemonController {
             return;
         }
         clearPokemonContainer();
-        showLoadingIndicator();
+        showLoadingIndicator("Cargando...");
 
+        callPokemonByName(searchText);
+    }
+
+    private void callPokemonByName(String searchText){
         Task<PokemonResponse> searchTask = new Task<PokemonResponse>() {
 
             @Override
@@ -256,6 +269,8 @@ public class PokemonController {
         });
 
         searchTask.setOnFailed(y -> {
+            clearPokemonContainer();
+            showLoadingIndicator("La busqueda no fue exitosa");
             Throwable ex = searchTask.getException();
             System.err.println("Fallo al obtener detalle del pokemon: " + searchText + ": " + (ex != null ? ex.getMessage() : "desconocido"));
             if (ex != null) ex.printStackTrace();
@@ -276,11 +291,24 @@ public class PokemonController {
         alert.showAndWait();
     }
 
-    private void showLoadingIndicator(){
-        Label loadingLabel = new Label("Cargando...");
+    private void showLoadingIndicator(String mensaje){
+        Label loadingLabel = new Label(mensaje);
         loadingLabel.setStyle("-fx-font-size: 16; -fx-text-fill: white; -fx-alignment: center;");
         pokemonContainer.getChildren().add(loadingLabel);
     }
 
-    
+    @FXML
+    private void loadMorePokemon(){
+        System.out.println("Tamaño del listado  "+lstPokemon.size());
+        loadInitialPokemon(POKEMON_LIMIT, lstPokemon.size());
+    }
+
+    @FXML
+    private void randomPokemon(){
+        clearPokemonContainer();
+        showLoadingIndicator("Cargando...");
+        Random aleatorio = new Random();
+        int numeroAleatorio = aleatorio.nextInt(1024) + 1;
+        callPokemonByName(numeroAleatorio+"");
+    }
 }
