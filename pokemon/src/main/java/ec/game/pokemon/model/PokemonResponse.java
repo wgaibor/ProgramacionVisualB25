@@ -8,6 +8,10 @@ public class PokemonResponse {
     private List<PokemonTypes> types;
     private PokemonSprites sprites;
     private List<PokemonStat> stats;
+    private List<PokemonAbilities> abilities;
+    private int height;
+    private int weight;
+    private int base_experience;
 
     public int getId() {
         return id;
@@ -42,5 +46,29 @@ public class PokemonResponse {
 
     public String getFormattedName() {
         return name != null ? name.substring(0, 1).toUpperCase()+name.substring(1) : "";
+    }
+    public int getHeight() {
+        return height;
+    }
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    public int getWeight() {
+        return weight;
+    }
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+    public int getBase_experience() {
+        return base_experience;
+    }
+    public void setBase_experience(int base_experience) {
+        this.base_experience = base_experience;
+    }
+    public List<PokemonAbilities> getAbilities() {
+        return abilities;
+    }
+    public void setAbilities(List<PokemonAbilities> abilities) {
+        this.abilities = abilities;
     }
 }

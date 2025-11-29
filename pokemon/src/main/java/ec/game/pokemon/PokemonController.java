@@ -3,10 +3,10 @@ package ec.game.pokemon;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import ec.game.pokemon.model.PokemonAbilities;
 import ec.game.pokemon.model.PokemonListItem;
 import ec.game.pokemon.model.PokemonListResponse;
 import ec.game.pokemon.model.PokemonResponse;
@@ -15,13 +15,12 @@ import ec.game.pokemon.model.PokemonTypes;
 import ec.game.pokemon.service.PokemonService;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -137,7 +136,39 @@ public class PokemonController {
     private Button createDetailsButton(PokemonResponse objPokemon) {
         Button buttonDetails = new Button("Ver Detalles");
         buttonDetails.setStyle("-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 8 16;");
+        buttonDetails.setOnAction(r -> showAlertDetailsPokemon(objPokemon));
         return buttonDetails;
+    }
+
+    private void showAlertDetailsPokemon(PokemonResponse pokemon){
+        String titlePokemon = "Detalles de "+ pokemon.getName();
+
+        StringBuilder details = new StringBuilder();
+        details.append("ID: #").append(String.format("%03d", pokemon.getId())).append("\n");
+        details.append("Altura: ").append(pokemon.getHeight()).append("\n");
+        details.append("Peso: ").append(pokemon.getWeight()).append("\n");
+        details.append("EXPERIENCIA BASE: ").append(pokemon.getBase_experience()).append("\n\n");
+
+        details.append("Tipos \n");
+        for (PokemonTypes tiposPokemon : pokemon.getTypes()) {
+            String nombreTipoPokemon = tiposPokemon.getType().getName().toUpperCase();
+            details.append("- ").append(nombreTipoPokemon).append("\n");
+        }
+
+        details.append("\n Estadísticas: \n");
+        for (PokemonStat estadisticaPokemon : pokemon.getStats()) {
+            String poder = estadisticaPokemon.getStat().getName().toUpperCase();
+            String nivel = estadisticaPokemon.getBase_stat()+"";
+            details.append("- ").append(poder)
+                                .append(" : ").append(nivel).append("\n");
+        }
+
+        details.append("\n Habilidades: \n");
+        for(PokemonAbilities abilityPokemon : pokemon.getAbilities()) {
+            String abiliy = abilityPokemon.getAbility().getName();
+            details.append("- ").append(abiliy).append("\n");
+        }
+        showAlert(AlertType.INFORMATION, titlePokemon , details.toString());
     }
 
     private VBox createStatsBox(PokemonResponse objPokemon) {

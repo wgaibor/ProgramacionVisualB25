@@ -1,10 +1,12 @@
+/home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/PokemonTypes.java
+/home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/ItemsTypes.java
+/home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/service/PokemonService.java
+/home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/ItemsAbility.java
 /home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/PokemonListItem.java
 /home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/App.java
 /home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/ItemStat.java
-/home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/PokemonTypes.java
-/home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/ItemsTypes.java
+/home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/PokemonAbilities.java
 /home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/PokemonListResponse.java
-/home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/service/PokemonService.java
 /home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/PokemonSprites.java
 /home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/PokemonController.java
 /home/wgaibor/Documentos/joao/TecLemas/PV/PVB25/pokemon/src/main/java/ec/game/pokemon/model/PokemonResponse.java
