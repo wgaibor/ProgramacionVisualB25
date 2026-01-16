@@ -2,10 +2,6 @@
 -- SCRIPT DE CREACIÓN DE BASE DE DATOS PARA CAFETERÍA
 -- =====================================================
 
--- Crear base de datos
-CREATE DATABASE IF NOT EXISTS cafeteria_db;
-USE cafeteria_db;
-
 -- =====================================================
 -- TABLA: admi_producto
 -- Almacena los productos que se venden en la cafetería
@@ -24,7 +20,7 @@ CREATE TABLE IF NOT EXISTS admi_producto (
     fe_ult_modificacion     TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de última modificación',
     INDEX idx_estado (estado),
     INDEX idx_categoria (categoria)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =====================================================
 -- TABLA: admi_usuario
@@ -46,7 +42,7 @@ CREATE TABLE IF NOT EXISTS admi_usuario (
     INDEX idx_estado (estado),
     INDEX idx_tipo_usuario (tipo_usuario),
     INDEX idx_email (email)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =====================================================
 -- TABLA: admi_insumo
@@ -69,7 +65,7 @@ CREATE TABLE IF NOT EXISTS admi_insumo (
     fe_ult_modificacion     TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de última modificación',
     INDEX idx_estado (estado),
     INDEX idx_categoria (categoria)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =====================================================
 -- TABLA: info_ventas
@@ -77,7 +73,7 @@ CREATE TABLE IF NOT EXISTS admi_insumo (
 -- =====================================================
 CREATE TABLE IF NOT EXISTS info_ventas (
     id_venta                INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id              INT NOT NULL COMMENT 'ID  del cliente que realizo la compra, referencia de la tabla admi_usuario.id_usuario',
+    usuario_id              INT COMMENT 'ID  del cliente que realizo la compra, referencia de la tabla admi_usuario.id_usuario',
     producto_id             INT NOT NULL COMMENT 'ID del producto vendedido, referencia de la tabla admi_producto.id_producto',
     cantidad                INT NOT NULL DEFAULT 1 COMMENT 'Cantidad de productos vendidos',
     precio_unitario         DECIMAL(10, 2) NOT NULL COMMENT 'Precio unitario al momento de la venta',
@@ -93,12 +89,10 @@ CREATE TABLE IF NOT EXISTS info_ventas (
     usr_ult_modificacion    VARCHAR(63) COMMENT 'Usuario que modificó por última vez el registro',
     fe_ult_modificacion     TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de última modificación',
     INDEX idx_fecha_venta (fecha_venta),
-    INDEX idx_id_usuario (id_usuario),
-    INDEX idx_id_producto (id_producto),
-    INDEX idx_estado (estado),
-    FOREIGN KEY (usuario_id) REFERENCES admi_usuario(id_usuario) ON DELETE SET NULL,
-    FOREIGN KEY (producto_id) REFERENCES admi_producto(id_producto) ON DELETE RESTRICT
-);
+    INDEX idx_usuario_id (usuario_id),
+    INDEX idx_producto_id (producto_id),
+    INDEX idx_estado (estado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =====================================================
 -- TABLA: info_gastos
@@ -123,6 +117,23 @@ CREATE TABLE IF NOT EXISTS info_gastos (
     INDEX idx_fecha_gasto (fecha_gasto),
     INDEX idx_categoria (categoria),
     INDEX idx_id_insumo (insumo_id),
-    INDEX idx_estado (estado),
-    FOREIGN KEY (insumo_id) REFERENCES admi_insumo(id_insumo) ON DELETE SET NULL
-);
+    INDEX idx_estado (estado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- AGREGAR FOREIGN KEYS DESPUÉS DE CREAR TODAS LAS TABLAS
+-- =====================================================
+
+-- Agregar foreign keys a info_ventas
+ALTER TABLE info_ventas 
+ADD CONSTRAINT fk_ventas_usuario 
+FOREIGN KEY (usuario_id) REFERENCES admi_usuario(id_usuario) ON DELETE SET NULL;
+
+ALTER TABLE info_ventas 
+ADD CONSTRAINT fk_ventas_producto 
+FOREIGN KEY (producto_id) REFERENCES admi_producto(id_producto) ON DELETE RESTRICT;
+
+-- Agregar foreign key a info_gastos
+ALTER TABLE info_gastos 
+ADD CONSTRAINT fk_gastos_insumo 
+FOREIGN KEY (insumo_id) REFERENCES admi_insumo(id_insumo) ON DELETE SET NULL;
