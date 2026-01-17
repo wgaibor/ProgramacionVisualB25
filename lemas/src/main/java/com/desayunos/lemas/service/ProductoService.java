@@ -1,5 +1,9 @@
 package com.desayunos.lemas.service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +49,22 @@ public class ProductoService {
         dto.setStockDisponible(producto.getStockDisponible());
         dto.setEstado(producto.getEstado());
         return dto;
+    }
+
+    public List<ProductoDTO> traerTodosLosProductos() {
+        return productoRepository.findAll().stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<ProductoDTO> obtenerPorId(Integer id){
+        return productoRepository.findById(id)
+            .map(this::convertirADTO);
+    } 
+
+    public List<ProductoDTO> obtenerPorCategoria(String categoria) {
+        return productoRepository.findByCategoria(categoria).stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
     }
 }
