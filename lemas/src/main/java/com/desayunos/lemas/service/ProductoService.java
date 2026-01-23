@@ -67,4 +67,32 @@ public class ProductoService {
                 .map(this::convertirADTO)
                 .collect(Collectors.toList());
     }
+
+
+    public Optional<ProductoDTO> actualizar(Integer id, ProductoDTO productoDTO, String usuario) {
+        return productoRepository.findById(id).map(producto -> {
+            producto.setItem(productoDTO.getItem());
+            producto.setPrecioUnitario(productoDTO.getPrecioUnitario());
+            producto.setDescripcion(productoDTO.getDescripcion());
+            producto.setCategoria(producto.getCategoria());
+            if (productoDTO.getStockDisponible() != null) {
+                producto.setStockDisponible(productoDTO.getStockDisponible());
+            }
+            if (productoDTO.getEstado() != null) {
+                producto.setEstado(productoDTO.getEstado());
+            }
+            producto.setUsrUltModificacion(usuario);
+            AdmiProducto actualizado = productoRepository.save(producto);
+            return convertirADTO(actualizado);
+        });
+    }
+
+
+    public boolean eliminar(Integer id) {
+        if (productoRepository.existsById(id)) {
+            productoRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
